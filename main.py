@@ -1,8 +1,5 @@
 import json
 import re
-
-import requests
-
 import FileHandler
 import mail_sender
 from Configurations import Public_Key, Private_Key
@@ -11,7 +8,7 @@ from API_Worker import WorkerAPI
 
 if __name__ == '__main__':
     api_worker = WorkerAPI(public_key=Public_Key, private_key=Private_Key)
-    api_worker.getOrderList()
+    api_worker.get_order_list()
 
     with open("Orders_list.json", "r", encoding="UTF-8") as file:
         orders_list = json.load(file)
@@ -31,4 +28,5 @@ if __name__ == '__main__':
                   "filepath": filepath}
         params = json.dumps(params)
         mail_sender = mail_sender.MailSender()
-        mail_sender.sendMail(to_email="someemail@gmail.com", subject=f'order_{order["id"]}', msg_body=params)
+        mail_sender.send_mail(to_email="someemail@gmail.com", subject=f'order_{order["id"]}', msg_body=params)
+        api_worker.change_order_status(order["id"])

@@ -15,7 +15,7 @@ class MailSender():
         self.mail_server = mail_server
         self.msg = MIMEMultipart()
 
-    def sendMail(self, to_email: str, subject: str, msg_body: str, image: MIMEImage = None):
+    def send_mail(self, to_email: str, subject: str, msg_body: str, image: MIMEImage = None):
         self.msg['From'] = self.username
         self.msg['To'] = to_email
         self.msg['Subject'] = subject

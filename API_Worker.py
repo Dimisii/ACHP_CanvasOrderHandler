@@ -11,9 +11,9 @@ class WorkerAPI:
         self.public_key = public_key
         self.private_key = private_key
         self.access_token = ""
-        self.getAccessToken()
+        self.get_access_token()
 
-    def getAccessToken(self):
+    def get_access_token(self):
         request_token_url = "http://api.pixlpark.com/oauth/requesttoken"
 
         try:
@@ -52,7 +52,7 @@ class WorkerAPI:
         finally:
             responce.close()
 
-    def getOrderList(self):
+    def get_order_list(self):
         orders_url = "http://api.pixlpark.com/orders"
         order_request_params = {"oauth_token": self.access_token,
                                 "take": 40,
@@ -74,8 +74,21 @@ class WorkerAPI:
                     json.dump(orders_list, file, indent=4, ensure_ascii=False)
                     print(file.name + " сохранен")
 
-                # return download_links
         except Exception:
+            print(traceback.print_exc())
+        finally:
+            responce.close()
+
+    def change_order_status(self, order_id):
+        url = f"http://api.pixlpark.com/orders/{order_id}/status"
+        params = {"oauth_token": self.access_token,
+                 "newStatus": "DesignCoordinationComplete"}
+
+        try:
+            responce = requests.post(url, params=params)
+            if responce.status_code == "200":
+                print(f"Статус заказа {order_id} успешно изменен.")
+        except:
             print(traceback.print_exc())
         finally:
             responce.close()
