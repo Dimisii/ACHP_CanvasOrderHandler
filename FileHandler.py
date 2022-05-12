@@ -30,9 +30,13 @@ class FileHandler():
         file_list = zip_order.namelist()
         for file in file_list:
             if file.count("surface_[0](empty)_zone_[0](gallery).jpg")>0:
-                image_path = zip_order.extract(file, f'C://Users/dms/Desktop/{self.year}/{self.mounth}/{self.day}/')
-                finally_image_path = f'C://Users/dms/Desktop/{self.year}/{self.mounth}/{self.day}/{order_id}.jpg'
-                os.rename(image_path, finally_image_path)
-                os.removedirs(image_path[0:image_path.find("surface_[0](empty)_zone_[0](gallery).jpg")])
+                try:
+                    image_path = zip_order.extract(file, f'C://Users/dms/Desktop/{self.year}/{self.mounth}/{self.day}/')
+                    finally_image_path = f'C://Users/dms/Desktop/{self.year}/{self.mounth}/{self.day}/{order_id}.jpg'
+                    os.rename(image_path, finally_image_path)
+                    os.removedirs(image_path[0:image_path.find("surface_[0](empty)_zone_[0](gallery).jpg")])
+                except:
+                    print(traceback.print_exc())
+                    return False
         return finally_image_path
 
