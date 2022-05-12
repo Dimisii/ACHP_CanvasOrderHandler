@@ -6,7 +6,7 @@ import os
 import zipfile
 
 
-class FileHandler():
+class FileHandler:
 
     def __init__(self):
         current_date = datetime.date.today()
@@ -25,11 +25,11 @@ class FileHandler():
             return False
         return path
 
-    def unZIP(self, path, order_id: str="no_id"):
+    def unZIP(self, path, order_id: str = "no_id"):
         zip_order = zipfile.ZipFile(path, "r", zipfile.ZIP_DEFLATED)
         file_list = zip_order.namelist()
         for file in file_list:
-            if file.count("surface_[0](empty)_zone_[0](gallery).jpg")>0:
+            if file.count("surface_[0](empty)_zone_[0](gallery).jpg") > 0:
                 try:
                     image_path = zip_order.extract(file, f'C://Users/dms/Desktop/{self.year}/{self.mounth}/{self.day}/')
                     finally_image_path = f'C://Users/dms/Desktop/{self.year}/{self.mounth}/{self.day}/{order_id}.jpg'

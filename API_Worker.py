@@ -45,7 +45,7 @@ class WorkerAPI:
             else:
                 raise
         except Exception:
-            print("Ошибка при получении accessToken" + responce.status_code)
+            print("Ошибка при получении accessToken" + str(responce.status_code))
             print(traceback.print_exc())
             return
 

@@ -1,4 +1,3 @@
-import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
@@ -6,7 +5,7 @@ from email.mime.text import MIMEText
 import Configurations
 
 
-class MailSender():
+class MailSender:
 
     def __init__(self, username=Configurations.mail_username, password=Configurations.mail_password,
                  mail_server=Configurations.mail_server):
